@@ -280,3 +280,66 @@ footer.site-footer .footer-links {
   h2 { font-size: 17px; }
   .card, .contact-box { padding: 16px 18px; }
 }
+
+/* Data table — used in privacy.html Section 3 (AI features) */
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 22px;
+  font-size: 14px;
+  background: #ffffff;
+  border: 1px solid #e6e8ec;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+table.data-table th {
+  background: #f4f6f9;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #555a66;
+  padding: 11px 14px;
+  border-bottom: 1px solid #e6e8ec;
+}
+
+table.data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef0f4;
+  vertical-align: top;
+  color: #3a3f47;
+  line-height: 1.5;
+}
+
+table.data-table tr:last-child td { border-bottom: none; }
+
+table.data-table td strong { color: #1a1a1a; }
+
+@media (max-width: 560px) {
+  table.data-table,
+  table.data-table thead,
+  table.data-table tbody,
+  table.data-table th,
+  table.data-table td,
+  table.data-table tr { display: block; }
+
+  table.data-table thead { display: none; }
+
+  table.data-table tr {
+    border-bottom: 1px solid #e6e8ec;
+    padding: 4px 0;
+  }
+
+  table.data-table tr:last-child { border-bottom: none; }
+
+  table.data-table td {
+    border-bottom: none;
+    padding: 6px 14px;
+  }
+
+  table.data-table td:first-child { padding-top: 12px; }
+  table.data-table td:last-child  { padding-bottom: 12px; }
+}
