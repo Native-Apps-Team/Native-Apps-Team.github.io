@@ -23,128 +23,191 @@
 <div class="container">
 
   <div class="doc-meta">
-    <strong>Effective date:</strong> May 11, 2026<br>
-    <strong>Version:</strong> 2.0<br>
+    <strong>Effective date:</strong> August 1, 2026<br>
+    <strong>Version:</strong> 3.0<br>
     <strong>Operator:</strong> Artem Lapshin, an individual operating NativeScan, Toronto, Ontario, Canada.<br>
     <strong>Contact:</strong> <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a>
   </div>
 
   <div class="summary">
-    <strong>Plain-language summary.</strong> NativeScan stores your scanned documents only on your device. We do not maintain a server-side copy, we do not back up your documents, and we have no ability to recover documents that are lost, deleted, or corrupted. When you use AI features such as AutoName, AutoSort, or Recall, the content you ask the AI to process is transmitted to a Cloudflare proxy operated by us and then to Google's Gemini API, processed transiently, and discarded. We do not sell your data. We do not use your data to train AI models. Free users see ads served by Google AdMob. We rely on multiple third parties (Apple, Google, Cloudflare) whose practices we do not control, and we are not responsible for their acts or omissions.
+    <strong>Plain-language summary.</strong> Your scanned documents are stored only on your device. We keep no server-side copy, no backup, and cannot recover anything you lose. When you use an AI feature, the relevant page image or text is sent through a proxy we operate on Cloudflare to Google's Gemini API, processed, and discarded — we do not retain it. The app also sends one anonymous "app opened" ping per hour containing a random ID that exists nowhere else, so we can count how many people use NativeScan. Free users see ads from Google AdMob, which does its own data collection under Google's policies. We do not sell your data and we do not use your documents to train AI models.
+  </div>
+
+  <div class="callout">
+    <strong>What changed in version 3.0 (August 1, 2026).</strong> This version corrects and expands the previous policy. Specifically: (a) we added anonymous usage analytics — the app's first outbound telemetry; (b) we corrected a statement in v2.0 which said voice input is transcribed entirely on your device — depending on your device, language, and iOS settings, Apple's speech recognition may send audio to Apple's servers, so we no longer claim otherwise; (c) we documented two AI features that were not previously described (automatic key-date extraction and automatic Recall prompt suggestions); (d) we documented Spotlight indexing and the additional advertising formats now used. Please read Sections 2, 3, and 4 in full.
   </div>
 
   <h2>1. Who this Policy Applies To</h2>
   <p>This Privacy Policy describes how Artem Lapshin ("<strong>we</strong>", "<strong>us</strong>", or "<strong>our</strong>"), as the operator of the NativeScan mobile application ("<strong>App</strong>") and any related websites (collectively, the "<strong>Service</strong>"), handles information from users of the Service. It is incorporated by reference into our <a href="terms.html">Terms of Service</a> and our <a href="ai-disclosure.html">AI Use Disclosure</a>.</p>
 
   <h2>2. Information We Process</h2>
-  <p>We have intentionally designed the App to minimise the personal information that leaves your device. The categories below describe what is processed, when, and by whom.</p>
+  <p>We have intentionally designed the App to minimise the personal information that leaves your device. The categories below describe what is processed, when, and by whom. Read Section 3 for the AI features specifically — those are where document content leaves your device.</p>
 
   <h3>2.1 Stored locally on your device only</h3>
   <ul>
-    <li><strong>Scanned documents and associated metadata</strong> — captured images, edited pages, document titles, categories, custom folders, and timestamps. These remain on your device and are not transmitted to us.</li>
-    <li><strong>App preferences</strong> — onboarding status, biometric-lock setting, subscription state, legal acceptance flags, and similar small values stored in iOS UserDefaults.</li>
-    <li><strong>Biometric data</strong> — Face ID / Touch ID for app lock is handled entirely by iOS on your device. We never see, process, or transmit your biometric data.</li>
-    <li><strong>Speech recognition input</strong> — voice queries for the Recall feature are transcribed by Apple's on-device speech-recognition framework. The audio does not leave your device; only the resulting transcribed text is sent to the AI provider.</li>
+    <li><strong>Scanned documents and associated metadata</strong> — captured images, edited pages, document titles, categories, custom folders, extracted key dates, and timestamps. These are stored in the App's private storage on your device. They are not uploaded to us and we keep no copy. Document content <em>is</em> transmitted for processing when you use an AI feature — see Section 3.</li>
+    <li><strong>App preferences</strong> — onboarding status, appearance setting, biometric-lock setting, subscription state, legal-acceptance flags, AI quota counters, ad frequency counters, and similar small values stored in iOS UserDefaults.</li>
+    <li><strong>Biometric data</strong> — Face ID / Touch ID / Optic ID for the optional app lock is handled entirely by iOS. We never see, receive, process, or transmit your biometric data; iOS only tells the App whether authentication succeeded.</li>
+    <li><strong>On-device text recognition (OCR)</strong> — performed locally using Apple's Vision framework. The OCR step itself involves no network connection. The resulting text is stored on your device and may later be transmitted if you use an AI feature.</li>
+    <li><strong>On-device date detection</strong> — the first pass at finding due dates and expiry dates uses Apple's on-device NSDataDetector over your OCR text, with no network connection.</li>
+    <li><strong>Derived caches</strong> — the App caches AI results and extracted dates on your device to avoid repeat processing. These are removed when you delete the App.</li>
   </ul>
 
-  <h3>2.2 Transmitted to third parties when you invoke a feature</h3>
-  <p>When you invoke an AI feature, the following is transmitted from your device through our proxy to Google's Gemini API:</p>
+  <h3>2.2 Spotlight indexing</h3>
+  <p>To let you find documents from the iOS system search screen, the App adds each document's name, its AI category, and a short excerpt of its recognised text (approximately the first 280 characters) to Apple's on-device Core Spotlight index. This index is maintained by iOS on your device. It is not transmitted to us. Note that content in the Spotlight index can surface in system search results outside the App, and may be included in encrypted device backups made by iOS. Deleting the App removes its Spotlight entries.</p>
+
+  <h3>2.3 Voice input for Recall</h3>
+  <p><strong>Please read this carefully — it corrects a statement in the previous version of this policy.</strong> When you use the microphone to dictate a Recall question, the App uses Apple's <code>SFSpeechRecognizer</code>. Depending on your device model, the language you speak, and your iOS settings, Apple's speech recognition may process your audio <strong>on Apple's servers rather than on your device</strong>. The App does not force on-device-only recognition. Audio handled this way is processed by Apple under Apple's privacy policy, not ours — we never receive the audio itself, only the resulting transcribed text, which is then used as your Recall question (and therefore transmitted as described in Section 3). If you would prefer that no audio ever leaves your device, type your Recall questions instead of dictating them, or deny the microphone and speech-recognition permissions.</p>
+
+  <h3>2.4 Anonymous usage analytics</h3>
+  <p>The App counts how many people use it. This is the App's only outbound telemetry that is not part of a feature you invoked.</p>
   <ul>
-    <li><strong>For AutoName and AutoSort:</strong> a single page from the document, downscaled to a small image, or a short text snippet derived from on-device OCR.</li>
-    <li><strong>For Recall:</strong> text content extracted from your documents that is relevant to your query, plus your typed or transcribed question, plus a brief chat history if you continue a conversation.</li>
+    <li><strong>What is sent:</strong> a random identifier the App generates for itself on first launch, the App's version number, and your major iOS version (for example "iOS 26"). Nothing else.</li>
+    <li><strong>When:</strong> at most once per hour, when you open the App. It is sent in the background and never delays anything.</li>
+    <li><strong>The identifier</strong> is a random value created by the App. It is <strong>not</strong> the Apple advertising identifier (IDFA), <strong>not</strong> the vendor identifier (IDFV), and is not derived from any hardware or account identifier. It exists nowhere else and cannot be matched to you, to your Apple ID, or to your activity in any other app or website. Deleting NativeScan destroys it permanently; reinstalling generates a brand-new one.</li>
+    <li><strong>What we store:</strong> our server stores only a one-way SHA-256 hash of that identifier, the timestamp we first saw it, the App version, and the iOS major version. We store two things per user: one permanent row recording that an install exists, and one row per hour in which the App was opened.</li>
+    <li><strong>What is never sent or stored with it:</strong> your IP address, device model, device name, locale, location, or any document, image, OCR, or chat content.</li>
   </ul>
-  <p>No App account, real name, email address, or persistent user identifier is attached to those requests by us. Limited operational data is processed transiently for abuse prevention and is not used to identify individual users.</p>
+  <p>We use this solely to know how many people use NativeScan, how many are active, and which App and iOS versions are in use so we can decide what to support. It is not used to profile you, is not sold or shared, and is not combined with any other source.</p>
 
-  <h3>2.3 Collected by third-party services we do not control</h3>
-  <p>Some information is collected by third parties when you use the Service. These third parties operate under their own terms and privacy policies. We have no control over, and accept no responsibility for, their practices.</p>
+  <h3>2.5 Service-reliability telemetry (our server)</h3>
+  <p>Our proxy records technical failures so we can detect outages — for example, if the AI provider starts rejecting requests. Each record contains a timestamp, which feature failed ("naming", "recall", "auth", or "request"), an error code, an HTTP status, and a short sanitised technical detail capped at 200 characters describing the <em>shape</em> of the problem (for example, the length of a malformed response). Records contain <strong>no</strong> identifiers, <strong>no</strong> document content, <strong>no</strong> OCR text, <strong>no</strong> chat messages, and <strong>no</strong> AI output. Successful requests are not logged at all.</p>
+
+  <h3>2.6 Abuse prevention</h3>
+  <p>To stop any single source from exhausting our AI quota, our proxy counts requests per IP address within a rolling one-hour window. Your IP address is used transiently as a lookup key in Cloudflare's edge cache and expires automatically at the end of that window. It is <strong>not</strong> written to our database, not associated with your install identifier, and not retained.</p>
+
+  <h3>2.7 Collected by third-party services we do not control</h3>
+  <p>These third parties operate under their own terms and privacy policies. We have no control over, and accept no responsibility for, their practices. You are responsible for reviewing their policies.</p>
   <ul>
-    <li><strong>Apple.</strong> If you purchase a subscription, Apple processes the transaction through StoreKit. We receive only the subscription status from Apple — we do not receive your Apple ID, email address, payment method, or any direct identifier.</li>
-    <li><strong>Google AdMob (free users only).</strong> AdMob may collect device identifiers (such as Apple's Identifier for Advertisers when allowed), ad-interaction data, coarse location, IP address, and similar information in order to serve and measure advertising. AdMob's processing is governed by Google's privacy policy. iOS App Tracking Transparency applies; you control tracking through your iOS Settings.</li>
-    <li><strong>Cloudflare.</strong> As the operator of our AI proxy, Cloudflare may process technical information (such as IP address and request metadata) as part of providing the proxy service. Cloudflare's processing is governed by Cloudflare's privacy policy.</li>
-    <li><strong>Google (Gemini API).</strong> The Gemini API processes the content you submit for an AI feature. Google's processing is governed by Google's API terms and applicable Gemini data-use policies.</li>
+    <li><strong>Apple.</strong> If you purchase a subscription, Apple processes the transaction through StoreKit. We receive only your subscription status — never your Apple ID, name, email address, or payment method. Apple's speech recognition may also process dictated audio (Section 2.3).</li>
+    <li><strong>Google AdMob (free users only).</strong> AdMob may collect device identifiers (including Apple's Identifier for Advertisers where you have permitted tracking), ad-interaction data, coarse location, IP address, and similar information in order to select, serve, and measure advertising. Ad formats used are banner, interstitial, rewarded, app-open, and native ads. AdMob's processing is governed by Google's privacy policy.</li>
+    <li><strong>Google (Gemini API).</strong> Processes the document content you submit for an AI feature. Governed by Google's API terms and applicable Gemini data-use policies.</li>
+    <li><strong>Cloudflare.</strong> Hosts our proxy and our analytics database. May process technical information such as IP address and request metadata as part of providing the service, governed by Cloudflare's privacy policy.</li>
   </ul>
-  <p>You are responsible for reviewing the policies of these third parties before using the App. Your continued use of the App constitutes your acceptance that data may be processed by these third parties as described.</p>
 
-  <h2>3. How We Use Information</h2>
+  <h3>2.8 App Tracking Transparency and advertising consent</h3>
+  <p>Free users are shown Apple's App Tracking Transparency prompt shortly after first entering the App, and, where required by law, a Google-provided consent form for advertising. If you allow tracking, AdMob may use your advertising identifier to personalise ads. If you decline, ads are still shown but are less personalised — <strong>the App works exactly the same either way</strong>, and no NativeScan feature is withheld. You can change your choice at any time in iOS Settings → Privacy &amp; Security → Tracking. Our own analytics described in Section 2.4 do not use the advertising identifier and are unaffected by this choice.</p>
+
+  <h2>3. AI Features — what leaves your device</h2>
+  <p>NativeScan's AI features are powered by Google's Gemini models, reached through a proxy we operate on Cloudflare. When you use one, the data listed below is transmitted from your device, through our proxy, to Google, and the response is returned to you. <strong>Our proxy does not retain the request or the response.</strong> See the <a href="ai-disclosure.html">AI Use Disclosure</a> for the full description, including the limitations of AI output.</p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Feature</th><th>What is transmitted</th><th>When</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>AutoName</strong> — suggests a document title</td>
+        <td>One page image from the document, downscaled, plus the recognised text of the document</td>
+        <td>Automatically after a scan finishes processing, and when you manually re-run it</td>
+      </tr>
+      <tr>
+        <td><strong>AutoSort</strong> — suggests a category folder</td>
+        <td>Same single request as AutoName — no additional data is sent</td>
+        <td>Same as AutoName (result applied for Pro subscribers)</td>
+      </tr>
+      <tr>
+        <td><strong>Recall</strong> — ask questions about your documents</td>
+        <td>Your question, plus the title and an excerpt of recognised text from up to five documents the App judges most relevant, plus recent messages in the current conversation</td>
+        <td>When you send a Recall message</td>
+      </tr>
+      <tr>
+        <td><strong>Recall suggestions</strong> — proposes questions you might ask</td>
+        <td>The title, category, and a short text excerpt from your three most recent documents</td>
+        <td><strong>Automatically</strong>, once your library reaches three documents, then refreshed periodically</td>
+      </tr>
+      <tr>
+        <td><strong>Key dates</strong> — finds due dates, expiry and renewal dates</td>
+        <td>The recognised text of the document, plus today's date. This is the largest text payload of any feature.</td>
+        <td><strong>Automatically</strong> in the background, only when on-device date detection finds nothing. Free tier: your two oldest documents. Pro: all documents.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Two of these run automatically.</strong> AutoName runs after every scan, and key-date extraction and Recall suggestions run in the background without a separate prompt each time. There is currently <strong>no in-app switch to disable AI processing</strong> — it is integral to how NativeScan works. If you do not want a particular document's contents processed this way, do not scan it into NativeScan. Your acceptance of the <a href="ai-disclosure.html">AI Use Disclosure</a> during onboarding is your consent to this processing.</p>
+  <p>No account, real name, email address, or persistent user identifier is attached to AI requests by us. The anonymous analytics identifier described in Section 2.4 is <strong>not</strong> sent with AI requests and cannot be used to link an AI request back to an install.</p>
+
+  <h2>4. Notifications</h2>
+  <p>Pro subscribers can enable reminders for key dates found in their documents. These are <strong>local</strong> notifications scheduled by the App on your device — nothing is sent to a server, and we cannot see them. Notification permission is requested only at the moment you turn the feature on, never at launch.</p>
+  <p><strong>Be aware:</strong> a reminder's text includes the document's name (for example, "Chase Bank Statement — in 3 days"), and iOS may display that on your lock screen. If your document names are sensitive, either leave reminders off or configure iOS to hide notification previews when locked (Settings → Notifications → Show Previews).</p>
+
+  <h2>5. How We Use Information</h2>
   <p>We use the limited information that reaches our infrastructure solely to:</p>
   <ul>
     <li>operate the AI features you invoke;</li>
-    <li>prevent abuse of our AI proxy (rate limiting, error detection);</li>
-    <li>diagnose and fix bugs reported to us; and</li>
+    <li>count unique and active users, and see which App and iOS versions are in use;</li>
+    <li>detect and diagnose outages and bugs;</li>
+    <li>prevent abuse of our AI proxy; and</li>
     <li>comply with applicable law.</li>
   </ul>
   <p><strong>We do not</strong>:</p>
   <ul>
     <li>sell, rent, or trade your information;</li>
-    <li>use your User Content to train, evaluate, or improve any AI model;</li>
-    <li>combine the data passing through our proxy with any other source to build a user profile;</li>
-    <li>send marketing emails (we do not have your email);</li>
-    <li>build advertising audiences from your scanned content; or</li>
-    <li>store scanned documents or AI request contents on our servers for any longer than is required to relay the request and the response.</li>
+    <li>use your documents, images, OCR text, or chat messages to train, evaluate, or fine-tune any AI model;</li>
+    <li>retain document content, AI requests, or AI responses on our servers after the request completes;</li>
+    <li>combine our analytics with any other source, or with advertising data, to build a profile of you;</li>
+    <li>attach your analytics identifier to AI requests, ad requests, or anything else;</li>
+    <li>send marketing email (we do not have your email address); or</li>
+    <li>use your scanned content to build advertising audiences.</li>
   </ul>
 
-  <h2>4. Legal Bases for Processing (where applicable)</h2>
-  <p>For users in the European Economic Area, the United Kingdom, or Switzerland, our legal bases for processing are:</p>
+  <h2>6. Legal Bases for Processing (where applicable)</h2>
+  <p>For users in the European Economic Area, the United Kingdom, or Switzerland:</p>
   <ul>
     <li><strong>Performance of a contract</strong> — providing the App and the features you invoke;</li>
-    <li><strong>Consent</strong> — your acceptance of these terms (including the AI Use Disclosure) at installation, and your in-app advertising-consent choices;</li>
-    <li><strong>Legitimate interests</strong> — operating, securing, and improving the App, preventing abuse, and defending legal claims, balanced against your rights and freedoms; and</li>
+    <li><strong>Consent</strong> — your acceptance of these documents at installation, and your advertising-consent and tracking choices;</li>
+    <li><strong>Legitimate interests</strong> — counting users, operating and securing the App, preventing abuse, diagnosing outages, and defending legal claims, balanced against your rights and freedoms; and</li>
     <li><strong>Compliance with legal obligations</strong> — where applicable.</li>
   </ul>
 
-  <h2>5. Children</h2>
-  <p>The App is not directed to children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and you believe your child has provided information to us, contact <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a> and we will take reasonable steps to address the matter.</p>
+  <h2>7. Children</h2>
+  <p>The App is not directed to children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided information to us, contact <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a> and we will take reasonable steps to address it.</p>
 
-  <h2>6. International Transfers</h2>
-  <p>We are based in Canada. When you use AI features, your content is transmitted to Cloudflare's global edge network and to Google's Gemini API, which may process the content in the United States or in other countries. By using AI features, you understand and accept that your information may be transferred to and processed in countries other than your own, including countries that may have different data-protection rules than those of your country, and you consent to such transfers to the extent your consent is required.</p>
+  <h2>8. International Transfers</h2>
+  <p>We are based in Canada. When you use AI features, your content is transmitted to Cloudflare's global edge network and to Google's Gemini API, which may process it in the United States or other countries. Our analytics database is hosted by Cloudflare. By using the App you understand and accept that your information may be transferred to and processed in countries other than your own, including countries with different data-protection rules, and you consent to such transfers where your consent is required.</p>
 
-  <h2>7. Data Retention, Backups, and Loss</h2>
+  <h2>9. Data Retention, Backups, and Loss</h2>
   <ul>
-    <li><strong>On your device:</strong> data persists until you delete the document, clear app data, or uninstall the App.</li>
-    <li><strong>In our proxy:</strong> request and response contents are not persisted by us. Limited operational data is kept only as long as needed to operate and secure the service and is not used to identify individual users.</li>
-    <li><strong>Third parties</strong> retain information according to their own retention policies, which we do not control.</li>
+    <li><strong>On your device:</strong> data persists until you delete the document, clear the App's data, or uninstall the App.</li>
+    <li><strong>AI requests in our proxy:</strong> not persisted at all. Request and response bodies exist only for the duration of the request.</li>
+    <li><strong>Analytics:</strong> the hashed install identifier and the hourly activity rows are retained indefinitely, because their entire purpose is counting users over time. They contain no personal data and cannot be traced to you.</li>
+    <li><strong>Reliability telemetry:</strong> retained indefinitely; contains no identifiers or content.</li>
+    <li><strong>Abuse-prevention counters:</strong> expire automatically within one hour.</li>
+    <li><strong>Third parties</strong> retain information according to their own policies, which we do not control.</li>
   </ul>
-  <p><strong>We do not back up your documents and have no ability to recover them.</strong> Because all scanned documents are stored locally on your device, the loss, theft, damage, replacement, or factory-reset of your device, the uninstallation of the App, the failure of iCloud or any other sync service, or any software malfunction may result in the permanent and irrecoverable loss of your data. You are solely responsible for backing up any documents that matter to you, by exporting them through the App's share feature and storing copies in a location you control. We will not be liable for any loss of data and have no obligation to attempt recovery.</p>
+  <p><strong>We do not back up your documents and have no ability to recover them.</strong> Because all scanned documents are stored locally on your device, the loss, theft, damage, replacement, or factory reset of your device, uninstallation of the App, failure of iCloud or any other sync service, or any software malfunction may result in the permanent and irrecoverable loss of your data. You are solely responsible for backing up anything that matters to you by exporting it through the App's share feature and storing copies somewhere you control. We will not be liable for any loss of data and have no obligation to attempt recovery.</p>
 
-  <h2>8. Security</h2>
-  <p>We use commercially reasonable security measures, including HTTPS in transit and an authenticated channel between the App and our proxy, together with abuse prevention measures. No method of transmission or storage is 100% secure, however, and we cannot guarantee absolute security. Because documents are stored on your device, the security of those documents depends primarily on the security of your device, your passcode, and your iCloud configuration. We strongly recommend enabling a device passcode and the in-app Face ID / Touch ID lock. We are not liable for unauthorised access to your device or your documents resulting from your device being lost, stolen, shared, jail-broken, or otherwise outside our reasonable control.</p>
+  <h2>10. Security</h2>
+  <p>We use commercially reasonable security measures, including HTTPS in transit, an authenticated channel between the App and our proxy, iOS file protection on sensitive caches, and abuse-prevention measures. No method of transmission or storage is 100% secure and we cannot guarantee absolute security. Because documents are stored on your device, their security depends primarily on the security of your device, your passcode, and your iCloud configuration. We strongly recommend enabling a device passcode and the in-app Face ID / Touch ID lock. We are not liable for unauthorised access to your device or documents resulting from your device being lost, stolen, shared, jailbroken, or otherwise outside our reasonable control.</p>
 
-  <h2>9. Your Rights</h2>
-  <p>Depending on where you live, you may have the following rights with respect to personal information that we control:</p>
+  <h2>11. Your Rights</h2>
+  <p>Depending on where you live, you may have rights to know what personal information we hold, request access to it, request correction or deletion, object to or restrict processing, request portability, withdraw consent, and lodge a complaint with a supervisory authority (in the EEA, your national data-protection authority; in Canada, the Office of the Privacy Commissioner of Canada; in California, the California Attorney General).</p>
+  <p>In practice, because the App stores documents only on your device and our servers hold no information that identifies you:</p>
   <ul>
-    <li>the right to know what personal information we hold about you;</li>
-    <li>the right to request access to that information;</li>
-    <li>the right to request correction or deletion of inaccurate information;</li>
-    <li>the right to object to or restrict certain processing;</li>
-    <li>the right to data portability;</li>
-    <li>the right to withdraw consent for processing based on consent; and</li>
-    <li>the right to lodge a complaint with a supervisory authority (in the EEA, your national data-protection authority; in Canada, the Office of the Privacy Commissioner of Canada; in California, the California Attorney General).</li>
+    <li><strong>To delete everything:</strong> uninstall the App. That removes every document, every cache, every preference, and the analytics identifier itself. Because we store only an unlinkable hash, once you uninstall there is nothing left that could ever be connected back to you.</li>
+    <li><strong>To delete a single document:</strong> swipe to delete it in the Library.</li>
+    <li><strong>For third-party-held data</strong> (Google, Cloudflare, AdMob, Apple), direct requests to those providers.</li>
+    <li><strong>For anything requiring our action</strong>, contact <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a>. Note that we may be unable to locate "your" analytics record, because by design we cannot tell which hashed identifier is yours.</li>
   </ul>
-  <p>Because the App stores documents only on your device, in most cases the most effective way to exercise these rights is to delete a document in-app or to uninstall the App, which removes all locally stored data. For third-party-held data (Google, Cloudflare, AdMob, Apple), please direct requests to those providers directly. To exercise any right that requires our action, contact <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a>; we will respond within the time required by applicable law.</p>
 
-  <h2>10. California Residents (CCPA / CPRA)</h2>
-  <p>In the twelve months preceding the effective date of this Policy we did not "sell" or "share" personal information for cross-context behavioural advertising, as those terms are defined under California law, beyond the operation of Google AdMob for free users where personalised-ads consent was given. You have the right to opt out of any such "sale" or "sharing" at any time through your iOS settings and in-app advertising consent. We do not discriminate against users who exercise their privacy rights.</p>
+  <h2>12. California Residents (CCPA / CPRA)</h2>
+  <p>In the twelve months preceding the effective date of this Policy we did not "sell" or "share" personal information for cross-context behavioural advertising as defined under California law, other than through the operation of Google AdMob for free users where you permitted tracking. You may opt out at any time through iOS Settings → Privacy &amp; Security → Tracking, and through any in-app advertising consent form. We do not discriminate against users who exercise their privacy rights.</p>
 
-  <h2>11. Tracking and Do Not Track</h2>
-  <p>The App's PrivacyInfo manifest declares that the App itself does not use first-party tracking. AdMob may use tracking for personalised advertising where you have allowed it through Apple's App Tracking Transparency prompt. Most web browsers send a "Do Not Track" signal; because our website is a static informational site and does not track visitors, no separate handling is required.</p>
+  <h2>13. Tracking and Do Not Track</h2>
+  <p>NativeScan's own analytics do not track you across apps or websites and do not use the advertising identifier. Google AdMob may use tracking for personalised advertising where you have allowed it through Apple's App Tracking Transparency prompt. Our website is a static informational site, does not track visitors, sets no cookies, and loads no analytics scripts, so no separate "Do Not Track" handling is required.</p>
 
-  <h2>12. Cookies and Local Storage</h2>
-  <p>This website (the GitHub Pages site you are reading) is a static informational site and does not set cookies, fingerprint visitors, or load analytics scripts. The App does not use web cookies.</p>
+  <h2>14. Third-Party Non-Liability</h2>
+  <p>The Service depends on third-party platforms and providers including Apple, Google (Gemini and AdMob), and Cloudflare. Those third parties operate under their own terms and privacy policies. We do not control them and are not responsible for any act, omission, change in policy, outage, data breach, security incident, or misuse on their part. Any claim arising out of a third party's conduct must be brought against that third party, not against us.</p>
 
-  <h2>13. Third-Party Non-Liability</h2>
-  <p>The Service depends on third-party platforms and providers, including Apple (App Store, StoreKit, iOS frameworks), Google (Gemini API, AdMob), and Cloudflare (proxy hosting and network). Those third parties operate under their own terms and privacy policies. We do not control them and we are not responsible for any act, omission, change in policy, outage, data breach, security incident, change in pricing or availability, or misuse on their part. Any claim arising out of the conduct of a third party must be brought against that third party, not against us.</p>
+  <h2>15. No Warranty as to Privacy Outcomes</h2>
+  <p>While we have designed the App to minimise the personal information that leaves your device, we do not warrant or guarantee any particular privacy outcome. Bugs, third-party changes, or future product changes may alter what is transmitted; where material, we will disclose those changes through an update to this Policy and an in-app re-acceptance prompt. Your use of the App is at your own risk, and our total liability for any privacy-related claim is subject to the limitation of liability in the <a href="terms.html">Terms of Service</a>.</p>
 
-  <h2>14. No Warranty as to Privacy Outcomes</h2>
-  <p>While we have designed the App to minimise the personal information that leaves your device, we do not warrant or guarantee any particular privacy outcome. Bugs, third-party changes, or future product changes may alter what is transmitted; if material, we will disclose those changes through an update to this Policy and an in-app re-acceptance prompt. Your use of the App is at your own risk, and our total liability for any privacy-related claim is subject to the limitation of liability in the <a href="terms.html">Terms of Service</a>.</p>
+  <h2>16. Changes to this Policy</h2>
+  <p>We may update this Policy from time to time. When we make material changes we update the version number and effective date at the top of this document. Where a change materially affects how we handle your information, we will require renewed in-app consent. Your continued use of the App after an update constitutes acceptance of the updated Policy.</p>
 
-  <h2>15. Changes to this Policy</h2>
-  <p>We may update this Policy from time to time. When we make material changes we will update the version number and effective date at the top of this document. Where the change materially affects how we handle your information, we will require renewed in-app consent. Your continued use of the App after an update constitutes acceptance of the updated Policy.</p>
-
-  <h2>16. Contact</h2>
-  <p>Questions, requests, and privacy complaints can be sent to: <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a>.</p>
+  <h2>17. Contact</h2>
+  <p>Questions, requests, and privacy complaints: <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a>.</p>
 
   <div class="callout">
-    <strong>Reminder.</strong> AI features are part of NativeScan's core functionality and cannot be separately disabled. If you do not agree to the AI processing described in our <a href="ai-disclosure.html">AI Use Disclosure</a>, do not install or use the App.
+    <strong>Reminder.</strong> AI features are part of NativeScan's core functionality and cannot be separately disabled. If you do not agree to the AI processing described in our <a href="ai-disclosure.html">AI Use Disclosure</a> and in Section 3 above, do not install or use the App.
   </div>
 
 </div>
