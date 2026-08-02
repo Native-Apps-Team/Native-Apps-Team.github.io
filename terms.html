@@ -23,14 +23,18 @@
 <div class="container">
 
   <div class="doc-meta">
-    <strong>Effective date:</strong> May 11, 2026<br>
-    <strong>Version:</strong> 2.0<br>
+    <strong>Effective date:</strong> August 1, 2026<br>
+    <strong>Version:</strong> 3.0<br>
     <strong>Operator:</strong> Artem Lapshin, an individual operating NativeScan, Toronto, Ontario, Canada.<br>
     <strong>Contact:</strong> <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a>
   </div>
 
   <div class="summary">
     <strong>Plain-language summary.</strong> NativeScan is a personal tool you use entirely at your own risk. We do not store your documents on our servers, but we send the content you choose to process to a third-party AI service (Google Gemini) by way of a Cloudflare proxy. The app is provided "as is" with no warranties of any kind. To the maximum extent permitted by law, we have no liability for anything that happens because of, in connection with, or related to your use of the app — including any loss of data, money, time, reputation, or opportunity, any incorrect AI output, and any consequence of relying on the app for any decision. You agree to defend and indemnify us against any claim brought because of your use of the app. If you do not agree to any part of these Terms, do not install or use the app and delete it from your device.
+  </div>
+
+  <div class="callout">
+    <strong>What changed in version 3.0 (August 1, 2026).</strong> The app gained anonymous usage analytics, automatic key-date extraction, and Pro date reminders since v2.0. Section 6 now describes all five AI features, Section 6A covers analytics, and Section 6B covers reminders and the fact that <strong>you must not rely on NativeScan to remind you of any deadline</strong>. Please also re-read the updated <a href="privacy.html">Privacy Policy</a> — it corrects an inaccurate statement in the previous version about voice input.
   </div>
 
   <div class="callout">
@@ -83,7 +87,8 @@
   </ul>
 
   <h2>6. AI Features and Third-Party Processors</h2>
-  <p>The App's artificial-intelligence features, including (without limitation) document categorisation ("AutoSort"), document naming ("AutoName"), and content question-and-answer ("Recall") (the "<strong>AI Features</strong>"), are an integral part of NativeScan. They are powered by third-party large language models, including Google's Gemini family of models, accessed through a secure proxy operated by us and hosted on Cloudflare.</p>
+  <p>The App's artificial-intelligence features (the "<strong>AI Features</strong>") are an integral part of NativeScan. They are powered by third-party large language models, including Google's Gemini family of models, accessed through a secure proxy operated by us and hosted on Cloudflare. As of version 3.0 they comprise: document naming ("AutoName"), document categorisation ("AutoSort"), content question-and-answer ("Recall"), automatic extraction of key dates such as due dates, expiry dates and renewal dates, and automatic generation of suggested Recall questions.</p>
+  <p><strong>Several AI Features run automatically without prompting you each time</strong> — AutoName and AutoSort after each scan, and key-date extraction and Recall suggestions in the background. There is no in-app control to disable AI processing. The <a href="ai-disclosure.html">AI Use Disclosure</a> sets out exactly what each feature transmits; your acceptance of these Terms is your consent to that processing.</p>
   <p>When you invoke an AI Feature, content from the relevant document — which may include images, OCR text, voice transcripts, prior chat history, and other content you have scanned or supplied — is transmitted from your device through our proxy and on to the third-party AI provider for processing. The provider's response is then returned to your device. See our <a href="ai-disclosure.html">AI Use Disclosure</a> and <a href="privacy.html">Privacy Policy</a> for more detail.</p>
   <p>You acknowledge and agree that:</p>
   <ul>
@@ -92,8 +97,23 @@
     <li>we do not warrant the availability, accuracy, completeness, reliability, fitness for any particular purpose, or non-infringement of any AI output;</li>
     <li>third-party providers (including Google and Cloudflare) operate under their own terms, privacy policies, and data-handling practices. We do not control them, do not assume their obligations, and are not responsible for any act, omission, change in policy, outage, breach, or misuse on their part;</li>
     <li>you are solely responsible for independently verifying any AI output before acting on it and for any consequence of acting on AI output without verification;</li>
-    <li>AI Features are part of the App's core functionality and cannot be separately disabled. If you do not agree to AI processing as described in the AI Use Disclosure, you must not install or use the App.</li>
+    <li>AI Features are part of the App's core functionality and cannot be separately disabled. If you do not agree to AI processing as described in the AI Use Disclosure, you must not install or use the App;</li>
+    <li>because several AI Features run automatically, content from a document may be transmitted for processing as soon as it is scanned — if you do not want that to happen to a particular document, do not scan it into the App; and</li>
+    <li>dates the App extracts are AI output and are subject to Section 6B — you must not rely on them.</li>
   </ul>
+
+  <h2>6A. Anonymous Usage Analytics</h2>
+  <p>The App sends an anonymous signal when you open it, at most once per hour, so that we can count how many people use NativeScan. It contains a random identifier the App generates for itself, the App version, and your major iOS version. It does not contain your advertising identifier, your device's vendor identifier, your IP address, your location, or any content from your documents, and it cannot be linked to you or to your activity in any other app or website. Deleting the App destroys the identifier permanently. Full detail is in Section 2.4 of the <a href="privacy.html">Privacy Policy</a>. By using the App you consent to this processing.</p>
+
+  <h2>6B. Key Dates and Reminders — No Reliance</h2>
+  <p>The App attempts to identify key dates in your documents and, for subscribers who enable the feature, can schedule local reminders for them. <strong>These are a convenience, not a guarantee, and you must not rely on them.</strong> You acknowledge and agree that:</p>
+  <ul>
+    <li>a date may be extracted incorrectly, attached to the wrong obligation, or missed entirely;</li>
+    <li>a reminder may fail to appear, be delayed, or be suppressed for reasons outside our control, including your device's notification settings, Focus modes, Low Power Mode, the device being off, or the App being uninstalled or restricted by iOS;</li>
+    <li>reminders are scheduled locally on your device — we do not operate a reminder service and have no ability to guarantee delivery; and</li>
+    <li><strong>you remain solely responsible for tracking your own deadlines, payments, renewals, expiries, and appointments.</strong> We are not liable for any missed deadline or any consequence of one, including late fees, interest, penalties, lapsed coverage, lapsed status, or lost rights.</li>
+  </ul>
+  <p>If a date matters, record it somewhere you control and verify it against the underlying document.</p>
 
   <h2>7. Acceptable Use</h2>
   <p>In addition to the licence restrictions in Section 4, you agree that you will not use the App, the AI Features, or any output of the App to:</p>
@@ -115,7 +135,8 @@
   <p>Refund requests are handled by Apple in accordance with Apple's policies. We do not have the ability to issue refunds directly. Promotional codes, discounts, free Pro grants, beta access, and bonus codes may be offered, modified, or revoked at our sole discretion at any time without notice and without liability. Prices may change at any time with prior notice through the App; continued use after a price change constitutes acceptance.</p>
 
   <h2>9. Advertising</h2>
-  <p>For free users, the App displays advertising provided by Google AdMob. Advertising helps support the free tier of the App. Advertising preferences, including personalised-advertising consent, are managed through your device settings and through any consent prompts presented in the App. We do not control the content of advertisements served by AdMob and are not responsible for the conduct of advertisers or the products or services advertised. See the <a href="privacy.html">Privacy Policy</a> for details.</p>
+  <p>For free users, the App displays advertising provided by Google AdMob in several formats: banner ads, full-screen interstitial ads, opt-in rewarded ads (which grant extra AI allowance), ads shown when you return to the App, and native ads placed within lists. Advertising helps support the free tier. Pro subscribers see no ads.</p>
+  <p>Advertising preferences, including personalised-advertising consent, are managed through Apple's App Tracking Transparency prompt, your device settings, and any consent form presented in the App. <strong>Declining tracking does not restrict any feature of the App</strong> — ads simply become less personalised. We do not control the content of advertisements served by AdMob and are not responsible for the conduct of advertisers or the products or services advertised. See the <a href="privacy.html">Privacy Policy</a> for details.</p>
 
   <h2>10. Beta, Experimental, and Pre-Release Features</h2>
   <p>From time to time we may make beta, experimental, preview, or pre-release features available in the App. Such features are provided on an "as is", best-effort basis, may contain bugs, may be removed or changed at any time without notice, and are excluded from any service-level expectation. Your use of such features is entirely at your own risk and any feedback you provide may be used by us without obligation or compensation to you.</p>
@@ -144,7 +165,7 @@
   <p>We respect the intellectual property rights of others and expect you to do the same. If you believe content stored or processed through the App infringes your copyright, send a notice to <a href="mailto:nativescan.tool@gmail.com">nativescan.tool@gmail.com</a> with: (i) a physical or electronic signature of the rights holder or an authorised agent; (ii) identification of the copyrighted work claimed to have been infringed; (iii) identification of the allegedly infringing material and information reasonably sufficient to locate it; (iv) your contact information; (v) a statement that you have a good-faith belief that the use is not authorised; and (vi) a statement, under penalty of perjury, that the information in the notice is accurate and that you are authorised to act on behalf of the rights holder. Because the App stores documents only on the user's device and not on our servers, our practical ability to remove allegedly infringing content is limited; we will, however, cooperate with valid legal process.</p>
 
   <h2>16. Termination</h2>
-  <p>These Terms remain in effect until terminated. We may suspend or terminate your licence to use the App at any time, with or without cause, with or without notice, and without liability, including for any breach of these Terms or any actual or suspected violation of the Acceptable Use provisions. You may terminate these Terms at any time by uninstalling the App and ceasing all use. Sections that by their nature should survive termination — including Sections 3 (Assumption of Risk), 5 (Your Content), 7 (Acceptable Use), 12 (Disclaimers), 13 (Limitation of Liability), 14 (Indemnification), 15 (DMCA), 17 (Apple-Specific Terms), 18 (Governing Law), 19 (Dispute Resolution), 21 (Export Control), and 22 (General) — will survive termination.</p>
+  <p>These Terms remain in effect until terminated. We may suspend or terminate your licence to use the App at any time, with or without cause, with or without notice, and without liability, including for any breach of these Terms or any actual or suspected violation of the Acceptable Use provisions. You may terminate these Terms at any time by uninstalling the App and ceasing all use. Sections that by their nature should survive termination — including Sections 3 (Assumption of Risk), 5 (Your Content), 6B (Key Dates and Reminders), 7 (Acceptable Use), 12 (Disclaimers), 13 (Limitation of Liability), 14 (Indemnification), 15 (DMCA), 17 (Apple-Specific Terms), 18 (Governing Law), 19 (Dispute Resolution), 21 (Export Control), and 22 (General) — will survive termination.</p>
 
   <h2>17. Apple-Specific Terms</h2>
   <p>You acknowledge and agree that the following provisions apply to your use of the App because it is licensed through the Apple App Store:</p>
